@@ -6,6 +6,7 @@
     <link href="style.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
     <script type="text/javascript" src="js/radius.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
 </head>
 <body>
 <!-- START PAGE SOURCE -->
@@ -14,7 +15,7 @@
         <div class="header_resize">
             <div class="menu_nav">
                 <ul>
-                    <li <?if($menuActive == 'main'):?> class="active"<?endif;?>><a href="/">Главная</a></li>
+                    <li <?if($menuActive == 'index'):?> class="active"<?endif;?>><a href="/">Главная</a></li>
                  <li<?if($menuActive == 'support'):?> class="active"<?endif;?>><a href="support.php">Поддержка</a></li>
                  <li<?if($menuActive == 'about'):?> class="active"<?endif;?>><a href="about.php">О нас</a></a></li>
                  <li<?if($menuActive == 'contact'):?> class="active"<?endif;?>><a href="contact.php">Контакты</a></li>
@@ -47,9 +48,10 @@
                     <h2 class="star"><span>Категории</span></h2>
                     <div class="clr"></div>
                     <ul class="sb_menu">
-                        <?foreach($arCategory as $category):?>
-                            <li><a href="?category=<?=$category['id'];?>"><?=$category['title']?></a></li><?//category -это созданный параметр для фильтрации?>
-                        <?endforeach;?>
+
+                        <? foreach($arCategory as $category): ?>
+                            <li><a href="/?<?=setPageParam('category',$category['id']);?>"$category['title'];?></a></li><?//category -это созданный параметр для фильтрации?>
+                        <? endforeach; ?>
                     </ul>
                 </div>
             </div>
@@ -92,7 +94,7 @@
     <div class="footer">
         <div class="footer_resize">
             <p class="lf">Copyright &copy; <?= date("Y");?> <a href="#">SiteName</a> - All Rights Reserved</p>
-            <p class="rf"><a href="">Free CSS Templates</a></p>
+            <p class="rf"><a href=".">Free CSS Templates</a></p>
             <div class="clr"></div>
         </div>
     </div>

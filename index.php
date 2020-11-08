@@ -1,5 +1,5 @@
 <?php
-require_once 'core/init.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/core/init.php';
 
 
 $title = 'Главная страница';
@@ -8,14 +8,19 @@ $num = 2;//Количество новостей на странице
  * Фильтрация по категориям
  */
 $where = '';
-if(isset($_GET['category'])){
+if(isset($_GET['category'])) {
     $category = intval($_GET['category']);
-    if($category > 0){
-        $where = 'WHERE `category_id` = ' . $category;
+    if ($category > 0){
+        $where = 'WHERE `category_id` = ?';
+    }
+}
+    if($where != '' && isset($category)){
+        $resTotal = getStmtResult($link,"SELECT * FROM `news` $where", [$category]);
+    }else{
+        $resTotal = getStmtResult($link, "SELECT * FROM `news`");
+
     }
 
-}
-$resTotal = mysqli_query($link, "SELECT * FROM `news` $where");
 $total = mysqli_num_rows($resTotal);//Количество записей в запросе
 
 $totalStr = ceil($total / $num);//Общее число страниц
@@ -26,23 +31,22 @@ if($page <= 0){
 }elseif($page > $totalStr){
   $page = $totalStr;// если номер страницы больше чем их количество
 }
-//$where = '';
+
 $offset = $page * $num - $num;//С какой новости начинать
-//echo $totalStr;
+$query = "SELECT n.`id`, n.`title`, n.`preview_text`, DATE_FORMAT(n.`date`, '%d.%m.%Y %H:%i) AS news_date, n.`image`, n.`comments_cnt`, c.`title` AS news_cat".
+    " FROM `news` n JOIN `category` c ON c.`id` = n.`category_id` $where ORDER BY n.`id` LIMIT ?, ?";
+if($where != '' && isset($category)){
+    $param = [$category, $offset, $num];
+}else{
+    $param = [$offset, $num];
+}
 
-//pr($_GET['category']);
 
-//pr($total);
-/* 
- $arCategory - СПИСОК КАТЕГОРИЙ ДЛЯ layout (init.php)
-*/
+$res = getStmtResult($link, $query, $param);
 
-$res = mysqli_query($link, "SELECT n.`id`, n.`title`, n.`preview_text`, n.`date`, n.`image`, n.`comments_cnt`, c.`title` AS news_cat".
-" FROM `news` n JOIN `category` c ON c.`id` = n.`category_id` $where ORDER BY n.`id` LIMIT $offset, $num");
-echo mysqli_error($link);
+
 $arNews = mysqli_fetch_all($res,MYSQLI_ASSOC);
 
-//pr($arNews);
 
 $arPage = range(1, $totalStr); //МАссив со страницами [1,2,3,4....]
 
@@ -65,17 +69,17 @@ $pageNavigation = renderTemplate('navigation', [
                                     'nextPage' => $nextPage,//передаем номер следующей страницы
                                     'prevPage' => $prevPage,//передаем номер предыдущей страницы
                                     'show' => $is_nav //параметр для показа навигации
-                                    ]);
+]);
 
 $page_content = renderTemplate("main", [ // получаем html шаблона main.
-                              'arNews' => $arNews,// массив с новостями полученными из базы 
+                              'arNews' => $arNews,// массив с новостями полученными из базы
                               'navigation' => $pageNavigation //передаем полученный html код навигации
 ]);
 $result = renderTemplate('layout',[ //получаем главный шаблон страницы
                                 'content' => $page_content, //передаем html код шаблона main
                                   'title' => $title, // передаем заголовок окна
                                   'arCategory' => $arCategory,//передаем массив с категориями полученный из баззы данных
-                                 'menuActive' => 'main'
+                                 'menuActive' => 'index'
                                 ]);
 
 echo $result; // выводим на экран окончательный html страницы

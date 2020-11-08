@@ -30,31 +30,39 @@ OFFSET m - смещение с какой начинать
 5. Обработать результат выполнения
 -->
 <?php
-pr($_GET);
+//r($_GET);
 ?>
 <a href="?page=1&action=main">Ссылка</a>
 
 
 
-/*
+<?php
+/**
+ *
 i - integer (число)
 S - string (Строка)
 d - double (число с плавающей точкой) 1.3
 b - blob (Бинарные данные)
 
 написать функцию- принемает дни недели где суббота это 7
+ */
 
 
-*/
-$category = $_GET['category'];
+
+?>
+<?php
+$cat = $_GET['category'];
 $title = 'Технологии';
-$stmt = mysqli_prepare($link, "SELECT * FROM `category` WHERE `title` = ? ");// Подготавливает запрос Возвращает указатель
+//$stmt = mysqli_prepare($link, "SELECT * FROM `category` WHERE `title` = ? ");// Подготавливает запрос Возвращает указатель
 
-mysqli_stmt_bind_param($stmt, "s", $title); // привязывает переменные к параметрам запроса
+//mysqli_stmt_bind_param($stmt, "s", $title); // привязывает переменные к параметрам запроса
 
-mysqli_stmt_execute($stmt); // выполняет подготовленный запрос
+//mysqli_stmt_execute($stmt); // выполняет подготовленный запрос
 
-  $res = mysqli_stmt_get_result($stmt); // получает результат запроса
+ // $res = mysqli_stmt_get_result($stmt); // получает результат запроса
+
+    $res = getStmtResult($link, "SELECT* FROM `category` WHERE `title`= ?", array($title));
     while($arRes = mysqli_fetch_assoc($res)){
         pr($arRes);
     }
+?>
