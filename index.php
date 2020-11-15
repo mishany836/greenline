@@ -26,7 +26,7 @@ if($page <= 0){
 $page = $totalStr; //если номер страницы больше чем их количество
 }
 $offset = $page * $num - $num;//  с какой новости начинать
-$query = "SELECT n. `id`, n.`title`, n. `preview_text, DATE_FORMAT(n.`date`, '%d.%m.%Y %H:%i') AS news_date, n.`comments`";
+$query = "SELECT n. `id`, n.`title`, n. `preview_text, DATE_FORMAT(n.`date`, '%d.%m.%Y %H:%i') AS news_date, n.`comments_cnt`";
     "FROM `news` n JOIN `category` c ON c.`id` = n. `category_id` $where ORDER BY n. `id` LIMIT ?, ?";
 
 //в зависимости от наличия условия подготавливаем параметры
