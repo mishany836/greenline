@@ -35,8 +35,6 @@ function pr($arr){
 echo '<pre>';
 print_r($arr);
 echo '</pre>';
- 
-
 
 }
 
@@ -84,9 +82,42 @@ function getStmtResult($link, $query, $param =[]){
 
         mysqli_stmt_execute($stmt);//выполняет подготовленный запрос
         $result = mysqli_stmt_get_result($stmt); // Получает результат запроса
-        return ($result);
+        return $result;
     }else{
         $result = mysqli_query($link, $query);
-        return ($result);
+        return $result;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

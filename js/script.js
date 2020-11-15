@@ -11,7 +11,19 @@ $(document).ready(function () {
                 url:'/ajax/comments_ajax.php',
                 data: $("#form").serialize(),
                 success: function (data){
-                    console.log(data);
+                   //$("#comments").html(data);
+                    let d = JSON.parse(data); //преобразует json в обьект
+                    //console.log(d);
+                    $("$comments").html(d.comments);
+                    $("#cc").html(d.cc);
+
+                    name.val('');
+                    email.val('');
+                    message.val('');
+
+                   //let cc = $("#cc").html(); //получаем колличество комментариев из span
+                  //let  newCc = parseInt(cc) + 1; // увеличиваем на 1
+                  // $("cc").html(newCc); // перезаписываем span
                 }
             });
         }else{
@@ -22,3 +34,16 @@ $(document).ready(function () {
         $("#form_error").html('');
     });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+

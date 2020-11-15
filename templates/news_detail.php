@@ -6,13 +6,19 @@
     <p>
       <?=$arNews['detail_text']?>
     </p>
-    <p>Tagged: <a href="#">orci</a>, <a href="#">lectus</a>, <a href="#">varius</a>, <a href="#">turpis</a></p>
-    <p><a href="#"><strong>Comments (<?=$arNews['comments_cnt']?>)</strong></a> <span>&nbsp;&bull;&nbsp;</span><?=$arNews['date']?><span>&nbsp;&bull;&nbsp;</span>
+    <?if(!empty($arTags)):?>
+    <p>Tagged:
+        <?foreach ($arTags as $tag):?>
+        <a href="#"><?=$tag['tag']?></a>,
+        <?endforeach;?>
+    </p>
+    <?endif;?>
+    <p><a href="#"><strong>Комментариев (<span id="cc"><?=$arNews['comments_cnt']?></span>)</strong></a> <span>&nbsp;&bull;&nbsp;</span><?=$arNews['date']?><span>&nbsp;&bull;&nbsp;</span>
         <a href="#"><strong>Edit</strong></a></p>
 </div>
 <div class="article">
     <h2> Коментарии к новости </h2>
-    <?=$comments?>
+    <div id="comments"><?=$comments?></div>
 </div>
 <div class="article">
     <h2><span>Оставьте </span>Коментарий</h2>
