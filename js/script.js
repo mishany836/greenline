@@ -33,6 +33,17 @@ $(document).ready(function () {
     $("input, textarea").focus(function (){ //очищаем ошибки
         $("#form_error").html('');
     });
+    $("#send_sub").click(function () {
+      $.ajax({
+          type: 'post',
+          url:'/ajax/subscribe.php',
+          data: $('form.subscribe').serialize(),
+          success: function (data) {
+             //console .log(data);
+              $("#sub_mess").html(data);
+          }
+      }) ;
+    });
 });
 
 

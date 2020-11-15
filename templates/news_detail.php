@@ -8,8 +8,15 @@
     </p>
     <?if(!empty($arTags)):?>
     <p>Tagged:
+        <?
+        $cntTags = count($arTags);
+        $c = 1;
+        ?>
         <?foreach ($arTags as $tag):?>
-        <a href="#"><?=$tag['tag']?></a>,
+        <a href="/?tag=<?=$tag['tag']?>"><?=$tag['tag']?></a><?if($cntTags > $c):?>,<?endif;?>
+        <?
+            $c++;
+            ?>
         <?endforeach;?>
     </p>
     <?endif;?>
@@ -36,7 +43,7 @@
                 <input id="email" name="email" class="text" />
             </li>
             <li>
-                <label for="message">Ваше сообщение Message</label>
+                <label for="message">Ваше сообщение </label>
                 <textarea id="message" name="message" rows="8" cols="50"></textarea>
             </li>
         <li>

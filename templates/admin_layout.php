@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <title><?=$title;?></title>
@@ -15,10 +15,7 @@
         <div class="header_resize">
             <div class="menu_nav">
                 <ul>
-                    <li<?if($menuActive == 'index'):?> class="active"<?endif;?>><a href="/">Главная</a></li>
-                 <li<?if($menuActive == 'support'):?> class="active"<?endif;?>><a href="support.php">Поддержка</a></li>
-                 <li<?if($menuActive == 'about'):?> class="active"<?endif;?>><a href="about.php">О нас</a></a></li>
-                 <li<?if($menuActive == 'contact'):?> class="active"<?endif;?>><a href="contact.php">Контакты</a></li>
+                    <li <?if($menuActive == 'index'):?> class="active"<?endif;?>><a href="/">Главная</a></li>
                 </ul>
             </div>
             <div class="logo">
@@ -30,31 +27,12 @@
     <div class="content">
         <div class="content_resize">
             <div class="mainbar">
-            
-            <?=$content;?>
+
+                <?=$content;?>
 
 
-               </div>
-            <div class="sidebar">
-                <div class="searchform">
-                    <form id="formsearch" name="formsearch" method="post" action="#">
-            <span>
-            <input name="editbox_search" class="editbox_search" id="editbox_search" maxlength="80" value="Поиск по сайту:" type="text" />
-            </span>
-                        <input name="button_search" src="images/search_btn.gif" class="button_search" type="image" />
-                    </form>
-                </div>
-                <div class="gadget">
-                    <h2 class="star"><span>Категории</span></h2>
-                    <div class="clr"></div>
-                    <ul class="sb_menu">
-
-                        <? foreach($arCategory as $category): ?>
-                            <li><a href="/?<?=setPageParam('category', $category['id']);?>"><?=$category['title'];?></a></li><?//category -это созданный параметр для фильтрации?>
-                        <? endforeach; ?>
-                    </ul>
-                </div>
             </div>
+
             <div class="clr"></div>
         </div>
     </div>
@@ -74,10 +52,9 @@
                 <p>Будь в курсе!<br />
                     На сайте представлена подборка самых свежих новостей науки, медицины, современных технологий и многого другого. Вы можете подписаться на нашу рассылку, чтобы всегда быть в курсе.</p>
                 <div>
-                    <div id="sub_mess"></div>
                     <form class="subscribe">
-                        <input type="text" name="email" placeholder="Ваш email" />
-                        <input type="button" id="send_sub" class="button" value="Подписаться" />
+                        <input type="email" name="email" placeholder="Ваш email" />
+                        <input type="submit" class="button" value="Подписаться" />
                     </form>
                 </div>
             </div>
@@ -86,7 +63,7 @@
                 <p>Мы будем рады ответить на любые вопросы.</p>
                 <p><a href="#"><?=SITE_EMAIL?></a></p>
                 <p><?=SITE_PHONE_1?><br />
-                <?=SITE_PHONE_2?></p>
+                    <?=SITE_PHONE_2?></p>
                 <p>Адрес: 123 TemplateAccess Rd1</p>
             </div>
             <div class="clr"></div>
