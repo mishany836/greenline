@@ -1,8 +1,8 @@
 <?php
 define("DB_HOST",'localhost');
-define("DB_USER",'root');
-define("DB_PASS", '');
-define("DB_BASE",'greenline');
+define("DB_USER",'v29513mj_green');
+define("DB_PASS", 'Ra3EE&uK');
+define("DB_BASE",'v29513mj_green');
 
 define("SITE_EMAIL","support@yoursite.com");
 define("SITE_PHONE_1","+1 (123) 444-5677");

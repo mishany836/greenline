@@ -26,8 +26,8 @@ if($page <= 0){
 $page = $totalStr; //если номер страницы больше чем их количество
 }
 $offset = $page * $num - $num;//  с какой новости начинать
-$query = "SELECT n. `id`, n.`title`, n. `preview_text, DATE_FORMAT(n.`date`, '%d.%m.%Y %H:%i') AS news_date, n.`comments_cnt`";
-    "FROM `news` n JOIN `category` c ON c.`id` = n. `category_id` $where ORDER BY n. `id` LIMIT ?, ?";
+$result = mysqli_query($link, "SELECT n.`id`, n.`title`, n.`preview_text`, n.`date`, n.`image`, n.`comments_cnt`, c.`title` AS news_cat FROM `news` n JOIN `category` c ON c.`id` = n.`category_id` LIMIT 0, 3");
+"FROM `news` n JOIN `category` c ON c.`id` = n. `category_id` $where ORDER BY n. `id` LIMIT ?, ?";
 
 //в зависимости от наличия условия подготавливаем параметры
 if($where != '' && isset($category)){
@@ -59,7 +59,7 @@ $pageNavigation = renderTemplate('navigation',[ // получаем html  шаб
     'prevPage' => $prevPage,
     'show' => $is_nav
 ]);
-$page_content = renderTemplate("main",[
+$page_content = renderTemplate("index",[
     'arNews' => $arNews,
     'navigation' => $pageNavigation
 ]);
@@ -71,6 +71,8 @@ $result = renderTemplate('layout',[
     'menuActive' => 'index'
 ]);
 echo  $result;
+
+
 
 
 

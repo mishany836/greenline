@@ -1,6 +1,6 @@
 <?php
 $link = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_BASE);
-$link = mysqli_connect('localhost', 'root', '', 'greenline');
+$link = mysqli_connect('localhost', 'root', '', '');
 mysqli_set_charset($link,"utf8");
 if(!$link){
 
